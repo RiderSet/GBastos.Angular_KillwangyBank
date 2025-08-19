@@ -1,0 +1,50 @@
+<app-botao (click)="abrirModal()" lass="botao-adicionar-transacao ">
+    <img src="icones/moeda.svg " alt=" " class="icone-moeda "> Adicionar transação
+</app-botao>
+
+<app-modal [(aberto)]="modalAberto">
+    <ng-container modal-cabecalho class="modal-cabecalho">
+        <img src="icones/moeda.svg" alt="">
+        <h2 class="text-xl">Adicionar transação</h2>
+    </ng-container>
+
+    <form class="form text-md" (ngSubmit)="aoSubmeter()" ngNativeValidate>
+        <label class="label-grupo">
+          Nome da transação
+          <input [(ngModel)]="novaTransacaoForm.nome" class="input" type="text" name="nome-transacao">
+        </label>
+
+        <fieldset class="grupo-tipo-transacao" required>
+            <legend class="legend">Tipo da transação</legend>
+            @for (tipo of tipoTransacao | keyvalue; track tipo.key) {
+            <label class="label-grupo-radio">
+              <input [(ngModel)]="novaTransacaoForm.tipo" [value]="tipo.value" type="radio" name="tipo-transacao" required>
+              {{ tipo.value }}
+            </label>}
+        </fieldset>
+
+        <label class="label-grupo">
+          Valor
+          <input [(ngModel)]="novaTransacaoForm.valor" class="input" type="number" name="valor-transacao" min="0.01" step="0.01" placeholder="R$ 500,00" required>
+        </label>
+
+        <label class="label-grupo">
+      Data da transação
+      <input class="input" [(ngModel)]="novaTransacaoForm.data" type="date" name="data-transacao" required>
+    </label>
+
+        <label class="label-grupo">
+      Conta Bancária
+
+      <select  [(ngModel)]="novaTransacaoForm.conta" name="conta-transacao" class="input select-conta-transacao" required>
+        <option value="" selected disabled>Selecione a conta</option>
+        <option value="Anybank">Anybank</option>
+        <option value="Bytebank">Bytebank</option>
+      </select>
+    </label>
+
+        <app-botao class="botao-adicionar-transacao ">
+            <button type="submit">Adicionar</button>
+        </app-botao>
+    </form>
+</app-modal>

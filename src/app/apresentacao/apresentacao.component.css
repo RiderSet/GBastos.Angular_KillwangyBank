@@ -1,0 +1,10 @@
+.apresentacao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.titulo {
+  font-weight: 700;
+  margin: 0px 30px;
+}

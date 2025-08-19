@@ -1,0 +1,23 @@
+<section class="contas-card">
+    <div class="titulo-wrapper">
+        <h2 class="texto-lg">Minhas contas</h2>
+    </div>
+
+    <app-card>
+        <div class="contas-e-botao">
+            <ul>
+                @for (conta of contas(); track conta.nome) {
+                <li class="item-entre-divisorias">
+                    <app-conta [conta]="conta"></app-conta>
+                </li>
+                } @empty {
+                <li aria-hidden="true">
+                    Ainda não há contas criadas.
+                </li>
+                }
+            </ul>
+
+            <app-botao-adicionar-conta class="botao-adicionar-conta" (contaCriada)="contaCriada.emit($event)"></app-botao-adicionar-conta>
+        </div>
+    </app-card>
+</section>
